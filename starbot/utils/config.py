@@ -50,7 +50,7 @@ DEFAULT_CONFIG = {
     "LOG_TO_FILE": True,
 
     # 连接每个直播间的间隔等待时长，用于避免连接大量直播间时的并发过多异常 too many file descriptors in select()，单位：秒
-    "CONNECTION_INTERVAL": 0.2,
+    "CONNECTION_INTERVAL": 2,
     # 成功连接所有主播直播间的最大等待时长，可使得日志输出顺序更加易读，一般无需修改此处，设置为 0 会自适应计算，单位：秒
     "WAIT_FOR_ALL_CONNECTION_TIMEOUT": 0,
 
@@ -91,6 +91,11 @@ DEFAULT_CONFIG = {
     "DANMU_CLOUD_STOP_WORDS": "",
     # 弹幕词云自定义词典路径，存储时每行一个词，以纯文本方式存储，在对弹幕进行切词时，词典中的词不会被切分开
     "DANMU_CLOUD_DICT": "",
+
+    # 是否自动保存直播报告图片
+    "SAVE_LIVE_REPORT_IMAGE": False,
+    # 是否自动保存动态图片
+    "SAVE_DYNAMIC_IMAGE": False,
 
     # 需加载的用户自定义命令包
     "CUSTOM_COMMANDS_PACKAGE": None,

@@ -1,6 +1,7 @@
 import asyncio
 import json
 import os
+from datetime import datetime
 from typing import Optional, Union, Tuple, List, Dict, Any
 
 from PIL import Image, ImageDraw, ImageFont
@@ -73,7 +74,16 @@ class DynamicPicGenerator:
         pic.draw_text_right(25, "本机器人由猫猫进行维护", Color.DEEPSKYBLUE)
         pic.crop_and_paste_bottom()
 
-        return pic.base64()
+        if config.get("SAVE_DYNAMIC_IMAGE"):
+            dynamic_dir = os.path.join(os.getcwd(), "dynamic")
+            if not os.path.exists(dynamic_dir):
+                os.makedirs(dynamic_dir)
+
+            return pic.save_and_get_base64(
+                os.path.join(dynamic_dir, f"{uname}_{dynamic_id}_{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}.png")
+            )
+        else:
+            return pic.base64()
 
     @classmethod
     def __remove_illegal_char(cls, s: str) -> str:
